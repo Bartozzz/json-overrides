@@ -1,13 +1,13 @@
 {
     "name"        : "json-overrides",
-    "version"     : "0.0.1",
+    "version"     : "0.0.11",
     "keywords"    : [ "json", "override", "specific", "extend" ],
     "description" : "Create various json files from a main parent json file",
 
     "author"  : "Łaniewski Bartosz <laniewski.bartozzz@gmail.com> (http://laniewski.me/)",
     "license" : "MIT",
 
-    "main" : "dest/index.js",
+    "main" : "dist/index.js",
 
     "repository" : {
         "type" : "git",
