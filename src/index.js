@@ -1,37 +1,38 @@
-"use strict";
-
-const _ = require( "underscore" );
+import _ from "underscore";
 
 /**
  * Checks if a json file has overrides, or if it has overrides for a specific
  * name.
  *
- * @param   {object}    json    - json to look for overrides in
- * @param   {string}    name    - name to check overrides for
+ * @param   {object}    json    JSON to look for overrides in
+ * @param   {string}    name    Name to check overrides for
  * @return  {bool}
+ * @access  private
  */
 function hasOverrides( json, name ) {
     if ( name ) {
-        return hasOverrides( json )
-            && ( name in json.overrides );
+        return hasOverrides( json ) && ( name in json.overrides );
     }
 
     return "overrides" in json;
 };
 
 /**
- * The name-specific properties will override the main json properties and the
- * `overrides` property will be removed.
+ * Name-specific properties will override parent JSON properties and `overrides`
+ * property will be removed.
  *
- * @param   {object}    json    - json to look for overrides in
- * @param   {string}    name    - name to check overrides for
+ * @param   {object}    json    JSON to look for overrides in
+ * @param   {string}    name    Name to check overrides for
  * @return  {object|undefined}
+ *
+ * @export  {function}
+ * @access  public
  */
-function override( json, name ) {
+export default ( json, name ) => {
     if ( ! hasOverrides( json, name ) )
         return undefined;
 
-    // Clone the json, so we can have a local copy of this:
+    // Clone the json, so we can have a local copy of it:
     const localCopy = _.clone( json );
     const overrides = localCopy.overrides[ name ];
 
@@ -41,6 +42,3 @@ function override( json, name ) {
     // Return the specific package file:
     return _.extend( localCopy, overrides );
 };
-
-module.exports              = override;
-module.exports.hasOverrides = hasOverrides;
