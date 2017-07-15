@@ -10,18 +10,11 @@ $ npm install json-overrides
 
 ## Usage
 
-You can load `json-overrides` like a typical node module or using the global variable `jsonOverrides`:
+`override( object, key );`
 
 ```javascript
-let override = require( "json-overrides" );
-// or...
-let override = window.jsonOverrides;
-```
-
-### Basic example
-
-```javascript
-const override = require( "json-overrides" );
+import override from "json-overrides";
+// or window.jsonOverrides if used outside Node.js environment
 
 let obj = {
     a : "I'm a default value!",
