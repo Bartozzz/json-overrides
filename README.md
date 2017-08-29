@@ -1,5 +1,7 @@
 # json-overrides
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Bartozzz/json-overrides.svg)](https://greenkeeper.io/)
+
 Create various json files from a main parent json file.
 
 ## Installation
