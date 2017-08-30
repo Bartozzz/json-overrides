@@ -23,14 +23,13 @@ function hasOverrides( json, name ) {
  *
  * @param   {object}    json    JSON to look for overrides in
  * @param   {string}    name    Name to check overrides for
- * @return  {object|undefined}
- *
+ * @return  {object|null}
  * @export  {function}
  * @access  public
  */
 export default ( json, name ) => {
     if ( ! hasOverrides( json, name ) )
-        return undefined;
+        return null;
 
     // Clone the json, so we can have a local copy of it:
     const localCopy = _.clone( json );
