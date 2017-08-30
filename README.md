@@ -1,8 +1,14 @@
-# json-overrides
+<div align="center">
+  <h1>json-overrides</h1>
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/Bartozzz/json-overrides.svg)](https://greenkeeper.io/)
+[![Build Status](https://img.shields.io/travis/Bartozzz/json-overrides.svg)](https://travis-ci.org/Bartozzz/json-overrides/)
+[![npm version](https://img.shields.io/npm/v/json-overrides.svg)](https://www.npmjs.com/package/json-overrides)
+[![npm downloads](https://img.shields.io/npm/dt/json-overrides.svg)](https://www.npmjs.com/package/json-overrides)
+  <br>
 
 Create various json files from a main parent json file.
+</div>
 
 ## Installation
 
@@ -57,10 +63,10 @@ override( obj, "projectC" );
 // }
 
 override( obj, "projectD" );
-// => undefined
+// => null
 
 override( { a : true }, "..." );
-// => undefined
+// => null
 ```
 
 ## Tests
