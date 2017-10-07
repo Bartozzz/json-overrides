@@ -1,5 +1,4 @@
 // @flow
-import {clone, extend} from "underscore";
 
 /**
  * Check if a JSON file has overrides or if it has overrides for a specific
@@ -25,18 +24,18 @@ function hasOverrides(json: Object, name: ?string): boolean {
  * @param   {string}    name    Name to check overrides for
  * @return  {object|null}
  */
-export default (json: Object, name: string): Object|null => {
+export default function jsonOverrides(json: Object, name: string): Object|null {
     if (!hasOverrides(json, name)) {
         return null;
     }
 
     // Clone the json, so we can have a local copy of it:
-    const localCopy: Object = clone(json);
+    const localCopy: Object = {...json};
     const overrides: Object = localCopy.overrides[name];
 
     // Delete the overrides property:
     delete localCopy.overrides;
 
     // Return the specific package file:
-    return extend(localCopy, overrides);
-};
+    return {...localCopy, ...overrides};
+}
