@@ -1,5 +1,5 @@
-const path = require( "path" );
-const webpack = require( "webpack" );
+const path = require("path");
+const webpack = require("webpack");
 
 module.exports = {
     entry: [
@@ -7,7 +7,7 @@ module.exports = {
     ],
 
     output: {
-        path: path.resolve( __dirname, "./dist" ),
+        path: path.resolve(__dirname, "./dist"),
         filename: "index.js",
         library: "jsonOverrides",
         libraryTarget: "umd",
@@ -23,15 +23,19 @@ module.exports = {
                 loader: "babel-loader",
                 exclude: /(node_modules|bower_components)/,
                 options: {
-                    presets: ["flow", "es2015", "es2016", "es2017", "stage-0"],
-                    plugins: ["transform-runtime", "add-module-exports"],
+                    presets: ["flow"],
+                    plugins: [
+                        "transform-runtime",
+                        "transform-object-rest-spread",
+                        "add-module-exports",
+                    ],
                 },
             },
         ],
     },
 
     plugins: [
-        new webpack.optimize.UglifyJsPlugin( {
+        new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false,
             },
@@ -40,6 +44,6 @@ module.exports = {
                 comments: false,
                 semicolons: true,
             },
-        } ),
+        }),
     ],
 };
