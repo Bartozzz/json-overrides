@@ -22,14 +22,6 @@ module.exports = {
                 test: /\.js$/,
                 loader: "babel-loader",
                 exclude: /(node_modules|bower_components)/,
-                options: {
-                    presets: ["flow"],
-                    plugins: [
-                        "transform-runtime",
-                        "transform-object-rest-spread",
-                        "add-module-exports",
-                    ],
-                },
             },
         ],
     },
