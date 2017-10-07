@@ -1,5 +1,3 @@
-"use strict";
-
 let override = require("../dist");
 let assert = require("assert");
 
@@ -43,7 +41,7 @@ function equal(a, b) {
 }
 
 describe("json-overrides", () => {
-    it("should override json", () => {
+    it("should override JSON", () => {
         assert.equal(true, equal({
             a: "I'm a default value for project A!",
             b: "I'll never change!",
@@ -58,10 +56,14 @@ describe("json-overrides", () => {
             a: "I'm a default value for project C!",
             b: "... or will I?",
         }, override(obj, "projectC")));
+
+        assert.equal(false, ("overrides" in override(obj, "projectA")));
+        assert.equal(false, ("overrides" in override(obj, "projectB")));
+        assert.equal(false, ("overrides" in override(obj, "projectC")));
     });
 
-    it("should return undefined if json cannot be overrided", () => {
-        assert.equal(undefined, override(obj, "projectD"));
-        assert.equal(undefined, override({a: true}, "projectD"));
+    it("should return null if JSON cannot be overrided", () => {
+        assert.equal(null, override(obj, "projectD"));
+        assert.equal(null, override({a: true}, "projectD"));
     });
 });
