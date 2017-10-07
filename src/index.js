@@ -1,3 +1,4 @@
+// @flow
 import _ from "underscore";
 
 /**
@@ -9,7 +10,7 @@ import _ from "underscore";
  * @return  {bool}
  * @access  private
  */
-function hasOverrides( json, name ) {
+function hasOverrides( json: Object, name: ?string): boolean {
     if ( name ) {
         return hasOverrides( json ) && ( name in json.overrides );
     }
@@ -27,13 +28,14 @@ function hasOverrides( json, name ) {
  * @export  {function}
  * @access  public
  */
-export default ( json, name ) => {
-    if ( ! hasOverrides( json, name ) )
+export default ( json: Object, name: string ): Object|null => {
+    if ( ! hasOverrides( json, name ) ) {
         return null;
+    }
 
     // Clone the json, so we can have a local copy of it:
-    const localCopy = _.clone( json );
-    const overrides = localCopy.overrides[ name ];
+    const localCopy: Object = _.clone( json );
+    const overrides: Object = localCopy.overrides[ name ];
 
     // Delete the overrides property:
     delete localCopy.overrides;
