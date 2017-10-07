@@ -5,8 +5,8 @@
  * name.
  *
  * @param   {Object}    json    JSON to look for overrides in
- * @param   {string}    name    Name to check overrides for
- * @return  {bool}
+ * @param   {?string}   name    Name to check overrides for
+ * @return  {boolean}
  */
 function hasOverrides(json: Object, name: ?string): boolean {
     if (name) {
@@ -17,12 +17,12 @@ function hasOverrides(json: Object, name: ?string): boolean {
 }
 
 /**
- * Override parent JSON properties with name-specific ones and removes overrides
+ * Override parent JSON properties with name-specific ones and remove overrides
  * property.
  *
  * @param   {Object}    json    JSON to look for overrides in
  * @param   {string}    name    Name to check overrides for
- * @return  {object|null}
+ * @return  {Object|null}
  */
 export default function jsonOverrides(json: Object, name: string): Object|null {
     if (!hasOverrides(json, name)) {
