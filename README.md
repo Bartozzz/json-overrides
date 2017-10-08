@@ -3,7 +3,7 @@
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/Bartozzz/json-overrides.svg)](https://greenkeeper.io/)
 [![Build Status](https://img.shields.io/travis/Bartozzz/json-overrides.svg)](https://travis-ci.org/Bartozzz/json-overrides/)
-[![License](https://img.shields.io/github/license/Bartozzz/json-overrides.svg)](LICENSE.md)
+[![License](https://img.shields.io/github/license/Bartozzz/json-overrides.svg)](LICENSE)
 [![NPM version](https://img.shields.io/npm/v/json-overrides.svg)](https://www.npmjs.com/package/json-overrides)
 [![NPM downloads](https://img.shields.io/npm/dt/json-overrides.svg)](https://www.npmjs.com/package/json-overrides)
   <br>
