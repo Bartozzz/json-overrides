@@ -41,29 +41,35 @@ function equal(a, b) {
 }
 
 describe("json-overrides", () => {
-    it("should override JSON", () => {
+    it("should override specified JSON", () => {
+        const overridesProjectA = override(obj, "projectA");
+        const overridesProjectB = override(obj, "projectB");
+        const overridesProjectC = override(obj, "projectC");
+
         assert.equal(true, equal({
             a: "I'm a default value for project A!",
             b: "I'll never change!",
-        }, override(obj, "projectA")));
+        }, overridesProjectA));
 
         assert.equal(true, equal({
             a: "I'm a default value for project B!",
             b: "I'll never change!",
-        }, override(obj, "projectB")));
+        }, overridesProjectB));
 
         assert.equal(true, equal({
             a: "I'm a default value for project C!",
             b: "... or will I?",
-        }, override(obj, "projectC")));
+        }, overridesProjectC));
 
-        assert.equal(false, ("overrides" in override(obj, "projectA")));
-        assert.equal(false, ("overrides" in override(obj, "projectB")));
-        assert.equal(false, ("overrides" in override(obj, "projectC")));
+        assert.equal(false, "overrides" in overridesProjectA);
+        assert.equal(false, "overrides" in overridesProjectB);
+        assert.equal(false, "overrides" in overridesProjectC);
     });
 
     it("should return null if JSON cannot be overrided", () => {
         assert.equal(null, override(obj, "projectD"));
-        assert.equal(null, override({a: true}, "projectD"));
+        assert.equal(null, override(null, "projectD"));
+        assert.equal(null, override(1234, "projectD"));
+        assert.equal(null, override(true, "projectD"));
     });
 });

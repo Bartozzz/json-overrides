@@ -1,8 +1,8 @@
 // @flow
 
 /**
- * Check if a JSON file has overrides or if it has overrides for a specific
- * name.
+ * Check if the specified `json` has overrides and/or if it has custom overrides
+ * for a specific `name`.
  *
  * @param   {Object}    json    JSON to look for overrides in
  * @param   {?string}   name    Name to check overrides for
@@ -17,25 +17,22 @@ function hasOverrides(json: Object, name: ?string): boolean {
 }
 
 /**
- * Override parent JSON properties with name-specific ones and remove overrides
- * property.
+ * Override `json` properties with name-specific ones and remove overrides
+ * property. Returns `null` if `json` is not a valid object or if it doesn't
+ * contain any overrides.
  *
  * @param   {Object}    json    JSON to look for overrides in
  * @param   {string}    name    Name to check overrides for
  * @return  {Object|null}
  */
 export default function jsonOverrides(json: Object, name: string): Object|null {
-    if (!hasOverrides(json, name)) {
+    if (!json || typeof json !== "object" || !hasOverrides(json, name)) {
         return null;
     }
 
-    // Clone the json, so we can have a local copy of it:
     const localCopy: Object = {...json};
     const overrides: Object = localCopy.overrides[name];
 
-    // Delete the overrides property:
     delete localCopy.overrides;
-
-    // Return the specific package file:
     return {...localCopy, ...overrides};
 }
