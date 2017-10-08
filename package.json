@@ -1,13 +1,15 @@
 {
     "name": "json-overrides",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "keywords": [
         "json",
         "json-files",
-        "override",
-        "extend"
+        "json-extend",
+        "object",
+        "extend",
+        "override"
     ],
-    "description": "Creates various JSON files from a main, parent JSON file",
+    "description": "Creates various JSON objects from a main, parent JSON object",
     "author": "Łaniewski Bartosz <laniewski.bartozzz@gmail.com> (http://laniewski.me/)",
     "license": "MIT",
     "main": "dist/index.js",
