@@ -23,7 +23,6 @@ $ npm install json-overrides
 
 ```javascript
 import override from "json-overrides";
-// or window.jsonOverrides if used outside Node.js environment
 
 let obj = {
     a: "I'm a default value!",
