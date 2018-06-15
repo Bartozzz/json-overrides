@@ -1,6 +1,6 @@
 {
   "name": "json-overrides",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "keywords": [
     "json",
     "json-files",
@@ -9,7 +9,7 @@
     "extend",
     "override"
   ],
-  "description": "Creates various JSON objects from a main, parent JSON object",
+  "description": "Creates name-specific manifests from an object. It overrides properties with name-specific ones and removes the `overrides` property.",
   "author": "Łaniewski Bartosz <laniewski.bartozzz@gmail.com> (http://laniewski.me/)",
   "license": "MIT",
   "main": "dist/index.js",
