@@ -8,7 +8,7 @@
 [![NPM downloads](https://img.shields.io/npm/dt/json-overrides.svg)](https://www.npmjs.com/package/json-overrides)
   <br>
 
-**json-overrides** allows you to create various JSON objects from a main parent JSON object. It overrides JSON properties with name-specific ones and remove the `overrides` property. It returns `null` if JSON is not a valid object or if it doesn't contain any overrides.
+**json-overrides** creates name-specific manifests from an object. It overrides properties with name-specific ones and removes the `overrides` property.
 </div>
 
 ## Installation
@@ -19,55 +19,57 @@ $ npm install json-overrides
 
 ## Usage
 
-`override(object: Object, key: string): Object|null`
+```
+override(object: Object, key: string): Object
+```
 
 ```javascript
 import override from "json-overrides";
 
 let obj = {
-    a: "I'm a default value!",
-    b: "I'll never change!",
+  a: "I'm a default value!",
+  b: "I'll never change!",
 
-    override : {
-        projectA: {
-            a: "I'm a default value for project A!"
-        },
-        projectB: {
-            a: "I'm a default value for project B!"
-        },
-        projectC: {
-            a: "I'm a default value for project B!",
-            b: "... or will I?"
-        }
+  overrides: {
+    projectA: {
+      a: "I'm a default value for project A!"
+    },
+    projectB: {
+      a: "I'm a default value for project B!"
+    },
+    projectC: {
+      a: "I'm a default value for project B!",
+      b: "... or will I?"
     }
+  }
 };
 
 override(obj, "projectA");
-// => {
-//     a: "I'm a default value for project A!",
-//     b: "I'll never change!"
+// {
+//   a: "I'm a default value for project A!",
+//   b: "I'll never change!"
 // }
 
 override(obj, "projectB");
-// => {
-//     a : "I'm a default value for project B!",
-//     b : "I'll never change!"
+// {
+//   a: "I'm a default value for project B!",
+//   b: "I'll never change!"
 // }
 
 override(obj, "projectC");
-// => {
-//     a: "I'm a default value for project C!",
-//     b: "... or will I?"
+// {
+//   a: "I'm a default value for project C!",
+//   b: "... or will I?"
 // }
 
 override(obj, "projectD");
-// => null
+// TypeError: Overrides for projectD not found
 
 override(123, "projectD");
-// => null
+// Error: Expected JSON to be an object (got number)
 
 override(true, "projectD");
-// => null
+// Error: Expected JSON to be an object (got boolean)
 ```
 
 ## Tests

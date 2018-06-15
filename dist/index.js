@@ -1,1 +1,58 @@
-!function(e,t){"object"==typeof exports&&"object"==typeof module?module.exports=t():"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?exports.jsonOverrides=t():e.jsonOverrides=t()}(global,function(){return function(e){var t={};function r(o){if(t[o])return t[o].exports;var n=t[o]={i:o,l:!1,exports:{}};return e[o].call(n.exports,n,n.exports,r),n.l=!0,n.exports}return r.m=e,r.c=t,r.d=function(e,t,o){r.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:o})},r.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},r.t=function(e,t){if(1&t&&(e=r(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var o=Object.create(null);if(r.r(o),Object.defineProperty(o,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var n in e)r.d(o,n,function(t){return e[t]}.bind(null,n));return o},r.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(t,"a",t),t},r.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},r.p="",r(r.s=1)}([function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var o=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var o in r)Object.prototype.hasOwnProperty.call(r,o)&&(e[o]=r[o])}return e},n="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};t.default=function(e,t){if(!e||"object"!==(void 0===e?"undefined":n(e))||!function e(t,r){if(r)return e(t)&&r in t.overrides;return"overrides"in t}(e,t))return null;var r=o({},e),u=r.overrides[t];return delete r.overrides,o({},r,u)},e.exports=t.default},function(e,t,r){e.exports=r(0)}])});
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+exports.default = jsonOverrides;
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+/**
+ * Check if the specified `json` has overrides and/or if it has custom overrides
+ * for a specific `name`.
+ *
+ * @param   {Object}    json    JSON to look for overrides in
+ * @param   {?string}   name    Name to check overrides for
+ * @return  {boolean}
+ */
+function hasOverrides(json, name) {
+  if (name) {
+    return hasOverrides(json) && json.overrides.hasOwnProperty(name);
+  }
+
+  return json.hasOwnProperty("overrides");
+}
+
+/**
+ * Override `json` properties with name-specific ones and remove overrides
+ * property. Throws errors if `json` is not a valid object or if it doesn't
+ * contain any overrides.
+ *
+ * @param   {Object}    json    JSON to look for overrides in
+ * @param   {string}    name    Name to check overrides for
+ * @throws  {TypeError}         When provided JSON in not a valid object
+ * @throws  {Error}             When could not find overrides
+ * @return  {Object}
+ */
+function jsonOverrides(json, name) {
+  if (!json || (typeof json === "undefined" ? "undefined" : _typeof(json)) !== "object") {
+    throw new TypeError("Expected JSON to be an object (got " + (typeof json === "undefined" ? "undefined" : _typeof(json)) + ")");
+  }
+
+  if (!hasOverrides(json, name)) {
+    throw new Error("Overrides for " + name + " not found");
+  }
+
+  var overrides = json.overrides,
+      rest = _objectWithoutProperties(json, ["overrides"]);
+
+  var nameSpecific = overrides[name];
+
+  return _extends({}, rest, nameSpecific);
+}
+module.exports = exports["default"];
