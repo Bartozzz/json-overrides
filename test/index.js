@@ -25,17 +25,17 @@ describe("json-overrides", () => {
     const overridesForProjectB = override(obj, "projectB");
     const overridesForProjectC = override(obj, "projectC");
 
-    assert.deepEqual(overridesForProjectA, {
+    assert.deepStrictEqual(overridesForProjectA, {
       a: "I'm a default value for project A!",
       b: "I'll never change!",
     });
 
-    assert.deepEqual(overridesForProjectB, {
+    assert.deepStrictEqual(overridesForProjectB, {
       a: "I'm a default value for project B!",
       b: "I'll never change!",
     });
 
-    assert.deepEqual(overridesForProjectC, {
+    assert.deepStrictEqual(overridesForProjectC, {
       a: "I'm a default value for project C!",
       b: "... or will I?",
     });
