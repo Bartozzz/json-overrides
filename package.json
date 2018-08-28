@@ -23,7 +23,7 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "6.26.3",
-    "babel-eslint": "^8.2.3",
+    "babel-eslint": "^9.0.0",
     "babel-plugin-add-module-exports": "^0.3.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
@@ -31,7 +31,7 @@
     "eslint": "5.0.1",
     "eslint-config-google": "^0.9.1",
     "eslint-plugin-flowtype": "^2.49.3",
-    "flow-bin": "^0.75.0",
+    "flow-bin": "^0.79.1",
     "mocha": "^5.2.0",
     "rimraf": "^2.6.2"
   },
