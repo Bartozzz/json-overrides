@@ -1,4 +1,10 @@
 {
-    "presets": ["flow", "env"],
-    "plugins": ["transform-object-rest-spread", "add-module-exports"]
+    "presets": [
+        "@babel/preset-flow",
+        "@babel/preset-env"
+    ],
+    "plugins": [
+        "@babel/plugin-proposal-object-rest-spread",
+        "add-module-exports"
+    ]
 }

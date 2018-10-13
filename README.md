@@ -6,9 +6,10 @@
 [![License](https://img.shields.io/github/license/Bartozzz/json-overrides.svg)](LICENSE)
 [![NPM version](https://img.shields.io/npm/v/json-overrides.svg)](https://www.npmjs.com/package/json-overrides)
 [![NPM downloads](https://img.shields.io/npm/dt/json-overrides.svg)](https://www.npmjs.com/package/json-overrides)
-  <br>
+<br>
 
-**json-overrides** creates name-specific manifests from an object. It overrides properties with name-specific ones and removes the `overrides` property.
+**json-overrides** creates name-specific manifests from a plain object. Overrides object properties with name-specific ones and removes the overrides property.
+
 </div>
 
 ## Installation
@@ -20,7 +21,7 @@ $ npm install json-overrides
 ## Usage
 
 ```
-override(object: Object, key: string): Object
+override(json: Overridable, name: string): Object
 ```
 
 ```javascript
@@ -34,9 +35,11 @@ let obj = {
     projectA: {
       a: "I'm a default value for project A!"
     },
+
     projectB: {
       a: "I'm a default value for project B!"
     },
+
     projectC: {
       a: "I'm a default value for project B!",
       b: "... or will I?"
@@ -63,13 +66,13 @@ override(obj, "projectC");
 // }
 
 override(obj, "projectD");
-// TypeError: Overrides for projectD not found
+// Error: Overrides for projectD not found
 
 override(123, "projectD");
-// Error: Expected JSON to be an object (got number)
+// TypeError: Expected JSON to be an object (got number)
 
 override(true, "projectD");
-// Error: Expected JSON to be an object (got boolean)
+// TypeError: Expected JSON to be an object (got boolean)
 ```
 
 ## Tests
