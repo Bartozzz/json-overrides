@@ -15,7 +15,6 @@ type Overridable = {
  *
  * @throws  {TypeError}   When provided JSON in not a valid object
  * @throws  {Error}       When could not find overrides
- *
  * @return  {Object}
  */
 export default function jsonOverrides(json: Overridable, name: string): Object {

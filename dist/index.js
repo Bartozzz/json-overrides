@@ -20,10 +20,12 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * property. Throw errors if `json` is not a valid object or if it doesn't
  * contain any overrides.
  *
- * @param   {Object}    json    JSON to look for overrides in
- * @param   {string}    name    Name to check overrides for
- * @throws  {TypeError}         When provided JSON in not a valid object
- * @throws  {Error}             When could not find overrides
+ * @param   {Overridable} json    JSON to look for overrides in
+ * @param   {string}      name    Name to check overrides for
+ *
+ * @throws  {TypeError}   When provided JSON in not a valid object
+ * @throws  {Error}       When could not find overrides
+ *
  * @return  {Object}
  */
 function jsonOverrides(json, name) {
