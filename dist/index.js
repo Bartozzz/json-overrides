@@ -25,7 +25,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  *
  * @throws  {TypeError}   When provided JSON in not a valid object
  * @throws  {Error}       When could not find overrides
- *
  * @return  {Object}
  */
 function jsonOverrides(json, name) {
@@ -33,7 +32,7 @@ function jsonOverrides(json, name) {
     throw new TypeError("Expected JSON to be an object (got ".concat(_typeof(json), ")"));
   }
 
-  if (!json.overrides || !(name in json.overrides)) {
+  if (_typeof(json.overrides) !== "object" || !(name in json.overrides)) {
     throw new Error("Overrides for ".concat(name, " not found"));
   }
 

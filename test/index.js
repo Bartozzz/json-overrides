@@ -20,6 +20,10 @@ describe("json-overrides", () => {
     },
   };
 
+  const emptyObj = {
+    // …
+  };
+
   it("should override specified JSON", () => {
     const overridesForProjectA = override(obj, "projectA");
     const overridesForProjectB = override(obj, "projectB");
@@ -47,6 +51,7 @@ describe("json-overrides", () => {
 
   it("should throw Error if JSON doesn't have overrides", () => {
     assert.throws(() => override(obj, "projectD"), Error);
+    assert.throws(() => override(emptyObj, "projectD"), Error);
   });
 
   it("should throw TypeError if JSON is not a valid object", () => {

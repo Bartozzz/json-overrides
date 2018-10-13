@@ -22,7 +22,7 @@ export default function jsonOverrides(json: Overridable, name: string): Object {
     throw new TypeError(`Expected JSON to be an object (got ${typeof json})`);
   }
 
-  if (!json.overrides || !(name in json.overrides)) {
+  if (typeof json.overrides !== "object" || !(name in json.overrides)) {
     throw new Error(`Overrides for ${name} not found`);
   }
 
