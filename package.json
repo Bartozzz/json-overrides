@@ -1,6 +1,6 @@
 {
   "name": "json-overrides",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "keywords": [
     "json",
     "json-files",
@@ -9,8 +9,11 @@
     "extend",
     "override"
   ],
-  "description": "Creates name-specific manifests from an object. It overrides properties with name-specific ones and removes the `overrides` property.",
-  "author": "Łaniewski Bartosz <laniewski.bartozzz@gmail.com> (http://laniewski.me/)",
+  "engines": {
+    "node": ">=8.12.0"
+  },
+  "description": "Creates name-specific manifests from a plain object. Overrides object properties with name-specific ones and removes the overrides property.",
+  "author": "Łaniewski Bartosz <bartosz@laniewski.me> (https://laniewski.me/)",
   "license": "MIT",
   "main": "dist/index.js",
   "repository": {
@@ -21,14 +24,15 @@
     "url": "https://github.com/Bartozzz/json-overrides/issues"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "6.26.3",
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/register": "7.0.0",
     "babel-eslint": "^10.0.1",
     "babel-plugin-add-module-exports": "^1.0.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-flow": "^6.23.0",
-    "eslint": "5.0.1",
+    "eslint": "^5.7.0",
     "eslint-config-google": "^0.10.0",
     "eslint-plugin-flowtype": "^3.0.0",
     "flow-bin": "^0.83.0",
@@ -39,9 +43,9 @@
     "prepare": "npm run clean && npm run lint && npm run flow && npm run build",
     "build": "npx babel src -d dist",
     "watch": "npx babel src -d dist -w",
-    "clean": "rimraf dist",
+    "clean": "npx rimraf dist",
     "lint": "npx eslint --fix src",
-    "test": "npm run prepare && mocha --require babel-core/register",
-    "flow": "flow"
+    "test": "npm run prepare && npx mocha --require @babel/register",
+    "flow": "npx flow"
   }
 }
