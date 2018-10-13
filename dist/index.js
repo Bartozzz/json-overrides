@@ -3,56 +3,45 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 exports.default = jsonOverrides;
 
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
-/**
- * Check if the specified `json` has overrides and/or if it has custom overrides
- * for a specific `name`.
- *
- * @param   {Object}    json    JSON to look for overrides in
- * @param   {?string}   name    Name to check overrides for
- * @return  {boolean}
- */
-function hasOverrides(json, name) {
-  if (name) {
-    return hasOverrides(json) && json.overrides.hasOwnProperty(name);
-  }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-  return json.hasOwnProperty("overrides");
-}
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 /**
  * Override `json` properties with name-specific ones and remove overrides
- * property. Throws errors if `json` is not a valid object or if it doesn't
+ * property. Throw errors if `json` is not a valid object or if it doesn't
  * contain any overrides.
  *
- * @param   {Object}    json    JSON to look for overrides in
- * @param   {string}    name    Name to check overrides for
- * @throws  {TypeError}         When provided JSON in not a valid object
- * @throws  {Error}             When could not find overrides
+ * @param   {Overridable} json    JSON to look for overrides in
+ * @param   {string}      name    Name to check overrides for
+ *
+ * @throws  {TypeError}   When provided JSON in not a valid object
+ * @throws  {Error}       When could not find overrides
+ *
  * @return  {Object}
  */
 function jsonOverrides(json, name) {
-  if (!json || (typeof json === "undefined" ? "undefined" : _typeof(json)) !== "object") {
-    throw new TypeError("Expected JSON to be an object (got " + (typeof json === "undefined" ? "undefined" : _typeof(json)) + ")");
+  if (!json || _typeof(json) !== "object") {
+    throw new TypeError("Expected JSON to be an object (got ".concat(_typeof(json), ")"));
   }
 
-  if (!hasOverrides(json, name)) {
-    throw new Error("Overrides for " + name + " not found");
+  if (!json.overrides || !(name in json.overrides)) {
+    throw new Error("Overrides for ".concat(name, " not found"));
   }
 
   var overrides = json.overrides,
       rest = _objectWithoutProperties(json, ["overrides"]);
 
   var nameSpecific = overrides[name];
-
-  return _extends({}, rest, nameSpecific);
+  return _objectSpread({}, rest, nameSpecific);
 }
-module.exports = exports["default"];
+
+module.exports = exports.default;
