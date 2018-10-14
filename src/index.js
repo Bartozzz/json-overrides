@@ -18,6 +18,14 @@ type Overridable = {
  * @return  {Object}
  */
 export default function jsonOverrides(json: Overridable, name: string): Object {
+  if (typeof json === "string") {
+    try {
+      json = JSON.parse(json);
+    } catch {
+      throw new TypeError("String is not a valid JSON string");
+    }
+  }
+
   if (!json || typeof json !== "object") {
     throw new TypeError(`Expected JSON to be an object (got ${typeof json})`);
   }
