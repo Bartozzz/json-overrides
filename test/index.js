@@ -59,4 +59,18 @@ describe("json-overrides", () => {
     assert.throws(() => override(true, "…"), TypeError);
     assert.throws(() => override(1234, "…"), TypeError);
   });
+
+  it("should convert a valid JSON string to JSON and function as expected", () => {
+    const objString = JSON.stringify(obj);
+
+    const overridesForProjectA = override(objString, "projectA");
+    assert.deepStrictEqual(overridesForProjectA, {
+      a: "I'm a default value for project A!",
+      b: "I'll never change!",
+    });
+  });
+
+  it("should throw TypeError if a string is not valid JSON", () => {
+    assert.throws(() => override("{ a: 'Not a valid object'", "projectA"), TypeError);
+  });
 });

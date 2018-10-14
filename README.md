@@ -21,7 +21,7 @@ $ npm install json-overrides
 ## Usage
 
 ```
-override(json: Overridable, name: string): Object
+override(json: string | Overridable, name: string): Object
 ```
 
 ```javascript
@@ -74,6 +74,8 @@ override(123, "projectD");
 override(true, "projectD");
 // TypeError: Expected JSON to be an object (got boolean)
 ```
+
+> **Note:** you can pass valid serialized objects as argument, e.g. `override(JSON.stringify(object), key");`.
 
 ## Tests
 
