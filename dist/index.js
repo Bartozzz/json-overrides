@@ -20,14 +20,22 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * property. Throw errors if `json` is not a valid object or if it doesn't
  * contain any overrides.
  *
- * @param   {Overridable} json    JSON to look for overrides in
- * @param   {string}      name    Name to check overrides for
+ * @param   {string|Overridable}  json  JSON to look for overrides in
+ * @param   {string}              name  Name to check overrides for
  *
  * @throws  {TypeError}   When provided JSON in not a valid object
  * @throws  {Error}       When could not find overrides
  * @return  {Object}
  */
 function jsonOverrides(json, name) {
+  if (typeof json === "string") {
+    try {
+      json = JSON.parse(json);
+    } catch (_unused) {
+      throw new TypeError("String is not a valid JSON string");
+    }
+  }
+
   if (!json || _typeof(json) !== "object") {
     throw new TypeError("Expected JSON to be an object (got ".concat(_typeof(json), ")"));
   }
@@ -36,8 +44,9 @@ function jsonOverrides(json, name) {
     throw new Error("Overrides for ".concat(name, " not found"));
   }
 
-  var overrides = json.overrides,
-      rest = _objectWithoutProperties(json, ["overrides"]);
+  var _json = json,
+      overrides = _json.overrides,
+      rest = _objectWithoutProperties(_json, ["overrides"]);
 
   var nameSpecific = overrides[name];
   return _objectSpread({}, rest, nameSpecific);

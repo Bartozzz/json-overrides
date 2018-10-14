@@ -10,17 +10,20 @@ type Overridable = {
  * property. Throw errors if `json` is not a valid object or if it doesn't
  * contain any overrides.
  *
- * @param   {Overridable} json    JSON to look for overrides in
- * @param   {string}      name    Name to check overrides for
+ * @param   {string|Overridable}  json  JSON to look for overrides in
+ * @param   {string}              name  Name to check overrides for
  *
  * @throws  {TypeError}   When provided JSON in not a valid object
  * @throws  {Error}       When could not find overrides
  * @return  {Object}
  */
-export default function jsonOverrides(json: Overridable, name: string): Object {
+export default function jsonOverrides(
+  json: string | Overridable,
+  name: string
+): Object {
   if (typeof json === "string") {
     try {
-      json = JSON.parse(json);
+      json = (JSON.parse(json): Overridable);
     } catch {
       throw new TypeError("String is not a valid JSON string");
     }
