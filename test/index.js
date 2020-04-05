@@ -24,56 +24,60 @@ describe("json-overrides", () => {
     // …
   };
 
-  it("should override specified JSON", () => {
-    const overridesForProjectA = override(obj, "projectA");
-    const overridesForProjectB = override(obj, "projectB");
-    const overridesForProjectC = override(obj, "projectC");
-
-    assert.deepStrictEqual(overridesForProjectA, {
-      a: "I'm a default value for project A!",
-      b: "I'll never change!",
-    });
-
-    assert.deepStrictEqual(overridesForProjectB, {
-      a: "I'm a default value for project B!",
-      b: "I'll never change!",
-    });
-
-    assert.deepStrictEqual(overridesForProjectC, {
-      a: "I'm a default value for project C!",
-      b: "... or will I?",
-    });
-
-    assert.equal(false, overridesForProjectA.hasOwnProperty("overrides"));
-    assert.equal(false, overridesForProjectB.hasOwnProperty("overrides"));
-    assert.equal(false, overridesForProjectC.hasOwnProperty("overrides"));
-  });
-
-  it("should throw Error if JSON doesn't have overrides", () => {
-    assert.throws(() => override(obj, "projectD"), Error);
-    assert.throws(() => override(emptyObj, "projectD"), Error);
-  });
-
-  it("should throw TypeError if JSON is not a valid object", () => {
+  it("should throw TypeError if argument is not valid", () => {
     assert.throws(() => override(null, "…"), TypeError);
     assert.throws(() => override(true, "…"), TypeError);
     assert.throws(() => override(1234, "…"), TypeError);
   });
 
-  it("should convert a valid JSON string to JSON and function as expected", () => {
-    const objString = JSON.stringify(obj);
-    const overridesForProjectA = override(objString, "projectA");
+  describe("object argument", () => {
+    it("should override specified JSON", () => {
+      const overridesForProjectA = override(obj, "projectA");
+      const overridesForProjectB = override(obj, "projectB");
+      const overridesForProjectC = override(obj, "projectC");
 
-    assert.deepStrictEqual(overridesForProjectA, {
-      a: "I'm a default value for project A!",
-      b: "I'll never change!",
+      assert.deepStrictEqual(overridesForProjectA, {
+        a: "I'm a default value for project A!",
+        b: "I'll never change!",
+      });
+
+      assert.deepStrictEqual(overridesForProjectB, {
+        a: "I'm a default value for project B!",
+        b: "I'll never change!",
+      });
+
+      assert.deepStrictEqual(overridesForProjectC, {
+        a: "I'm a default value for project C!",
+        b: "... or will I?",
+      });
+
+      assert.equal(false, overridesForProjectA.hasOwnProperty("overrides"));
+      assert.equal(false, overridesForProjectB.hasOwnProperty("overrides"));
+      assert.equal(false, overridesForProjectC.hasOwnProperty("overrides"));
+    });
+
+    it("should throw Error if JSON doesn't have overrides", () => {
+      assert.throws(() => override(obj, "projectD"), Error);
+      assert.throws(() => override(emptyObj, "projectD"), Error);
     });
   });
 
-  it("should throw TypeError if a string is not valid JSON", () => {
-    assert.throws(
-      () => override("{ a: 'Not a valid object'", "projectA"),
-      TypeError
-    );
+  describe("string argument", () => {
+    it("should convert a valid JSON string to JSON and function as expected", () => {
+      const objString = JSON.stringify(obj);
+      const overridesForProjectA = override(objString, "projectA");
+
+      assert.deepStrictEqual(overridesForProjectA, {
+        a: "I'm a default value for project A!",
+        b: "I'll never change!",
+      });
+    });
+
+    it("should throw TypeError if a string is not valid JSON", () => {
+      assert.throws(
+        () => override("{ a: 'Not a valid object'", "projectA"),
+        TypeError
+      );
+    });
   });
 });
