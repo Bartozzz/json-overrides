@@ -7,13 +7,13 @@ type Overridable = {
 
 /**
  * Override `json` properties with name-specific ones and remove overrides
- * property. Throw errors if `json` is not a valid object or if it doesn't
+ * property. Throw errors if `json` is not a valid JSON/object or if it doesn't
  * contain any overrides.
  *
  * @param   {string|Overridable}  json  JSON to look for overrides in
  * @param   {string}              name  Name to check overrides for
  *
- * @throws  {TypeError}   When provided JSON in not a valid object
+ * @throws  {TypeError}   When provided JSON if argument is not valid
  * @throws  {Error}       When could not find overrides
  * @return  {Object}
  */
