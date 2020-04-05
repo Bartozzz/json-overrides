@@ -1,10 +1,9 @@
 {
-    "presets": [
-        "@babel/preset-flow",
-        "@babel/preset-env"
-    ],
-    "plugins": [
-        "@babel/plugin-proposal-object-rest-spread",
-        "add-module-exports"
-    ]
+  "comments": false,
+  "presets": [
+    ["@babel/preset-env", { "targets": { "node": "8" } }],
+    ["@babel/preset-flow"],
+    ["minify"]
+  ],
+  "plugins": ["@babel/plugin-proposal-object-rest-spread", "add-module-exports"]
 }

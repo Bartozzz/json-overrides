@@ -37,8 +37,8 @@ export default function jsonOverrides(
     throw new Error(`Overrides for ${name} not found`);
   }
 
-  const {overrides, ...rest} = json;
+  const { overrides, ...rest } = json;
   const nameSpecific = overrides[name];
 
-  return {...rest, ...nameSpecific};
+  return { ...rest, ...nameSpecific };
 }
