@@ -51,7 +51,7 @@
     "eslint-plugin-standard": "5.0.0",
     "flow-bin": "^0.150.0",
     "fs-extra": "10.0.0",
-    "glob": "7.1.6",
+    "glob": "7.1.7",
     "mocha": "^8.0.1",
     "prettier": "2.2.1",
     "rimraf": "^3.0.2",
